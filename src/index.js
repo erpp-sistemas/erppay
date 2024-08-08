@@ -18,18 +18,7 @@ const validateToken = (req, res, next) => {
       return res.status(403).json({ error: 'No token provided' });
     }
     
-    // Aquí deberías añadir la lógica para verificar el token
-    // Por ejemplo, si estás usando JWT, podrías usar la biblioteca jsonwebtoken
-    // jwt.verify(token, 'secret_key', (err, decoded) => {
-    //   if (err) {
-    //     return res.status(403).json({ error: 'Invalid token' });
-    //   }
-    //   req.user = decoded;
-    //   next();
-    // });
-  
-    // Para este ejemplo, simplemente verificamos si el token es 'mi_token'
-    if (token === 'mercately_erppay_caco') {
+    if (token === 'cdeccac7dc6a6d1412808a4') {
       next();
     } else {
       return res.status(403).json({ error: 'Invalid token' });
@@ -49,8 +38,9 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/api/generate-edocta', validateToken, (req, res) => {
+    let { account } = req.body;
     res.status(200).json({
-        message: 'Hola desde el endpoint'
+        message: 'Espera un momento se esta generando tu archivo con el numero de cuenta ' + account
     })
 })
 
