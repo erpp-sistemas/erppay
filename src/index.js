@@ -41,7 +41,7 @@ app.post('/api/generate-edocta', validateToken, (req, res) => {
     let { account } = req.body;
     res.status(200).json({
         option_name: 'Selección de numero de cuenta',
-        message: 'Espera un momento se esta generando tu archivo con el numero de cuenta ' + account,
+        message: `Se genero su estado de cuenta correctamente, ya puedes visualizarlo\nhttps://erppay.s3.us-east-1.amazonaws.com/estados_cuenta/84347-2024-08-08T19:42:39.379Z.pdf`,
         options: [
           {
             key: '12345',
