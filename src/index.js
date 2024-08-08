@@ -40,7 +40,18 @@ app.get('/api', (req, res) => {
 app.post('/api/generate-edocta', validateToken, (req, res) => {
     let { account } = req.body;
     res.status(200).json({
-        message: 'Espera un momento se esta generando tu archivo con el numero de cuenta ' + account
+        option_name: 'Selección de numero de cuenta',
+        message: 'Espera un momento se esta generando tu archivo con el numero de cuenta ' + account,
+        options: [
+          {
+            key: '12345',
+            value: 'Opcion1'
+          },
+          {
+            key: '65476',
+            value: 'Opcion2'
+          }
+        ]
     })
 })
 
