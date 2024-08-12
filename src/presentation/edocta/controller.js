@@ -1,5 +1,7 @@
+import { envs } from '../../config/envs.js';
 import { StorageAdapter } from '../../config/storage.adapter.js';
 import { EdoCtaService } from '../../services/edo-cta.service.js';
+import axios from 'axios';
 
 
 export class EdoCtaController {
@@ -29,15 +31,44 @@ export class EdoCtaController {
                 const date = new Date();
                 const fecha = date.toISOString();
                 this.storage.uploadFile(pdf, 'estados_cuenta', `${account}-${fecha}.pdf`)
-                    .then(file_url => res.status(200).json({
-                        option_name: 'Selección de numero de cuenta',
-                        message: `Tu estado de cuenta se genero con éxito, lo puedes visualizar en la siguiente liga\n${file_url}`  
-                    })).catch(error => res.status(400).json({ error: 'Error al subir el archivo ', error }))
+                    .then(file_url => {
+                        res.status(200).json({
+                            option_name: 'Selección de numero de cuenta',
+                            message: `Tu estado de cuenta se genero con éxito, lo puedes visualizar en la siguiente liga\n${file_url}`
+                        })
+                    }).catch(error => res.status(400).json({ error: 'Error al subir el archivo ', error }))
 
             }).catch(error => res.status(500).json({ error: 'Error al generar el pdf ', error }))
 
         }).catch(error => res.status(500).json({ error: 'Error al obtener la data ', error }))
 
     }
+
+
+    getLinkWaopay = async (req, res) => {
+        let { account } = req.body;
+        EdoCtaService.getInfoAccount(account).then(data => {
+            const { propietario, adeudo_contribuyente } = data;
+            const obj_waopay = EdoCtaService.createLinkWaopay(propietario, adeudo_contribuyente)
+
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${envs.AUTHORIZATION}`,
+                    'Content-Type': 'application/json' // Asegúrate de que el tipo de contenido esté correctamente definido
+                },
+                data: obj_waopay
+            };
+
+            axios.get(envs.URL_WAOPAY, config)
+                .then(data => {
+                    const url = data.data.url
+                    res.status(200).json({
+                        option_name: 'Selección de numero de cuenta',
+                        message: `Puedes ingresar a la siguiente liga para realizar tu pago\n${url}`
+                    })
+                })
+        })
+    }
+
 
 }

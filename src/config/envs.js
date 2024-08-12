@@ -8,4 +8,6 @@ export const envs = {
     ACCESS_KEY_ID:get('ACCESS_KEY_ID').required().asString(),
     SECRET_ACCESS_KEY: get('SECRET_ACCESS_KEY').required().asString(),
     REGION: get('REGION').required().asString(),
+    URL_WAOPAY: get('URL_WAOPAY').required().asString(),
+    AUTHORIZATION: get('AUTHORIZATION').required().asString(),
 }

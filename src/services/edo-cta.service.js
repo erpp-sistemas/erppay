@@ -42,6 +42,35 @@ export class EdoCtaService {
 
     }
 
+    static createLinkWaopay(owner, debt_arr) {
+
+        const total = debt_arr.reduce((acc, debt) => acc + Number(debt.sub_total), 0);
+        const fecha_corte = debt_arr[0].fecha_corte;
+
+        const data = {
+            "client-name": owner,
+            "client-lastname": "",
+            "whatsapp": "5215531284105",
+            "reference": "A12345",
+            "concepts": [
+                {
+                    "id": "NA",
+                    "title": "Pago predial",
+                    "qty": "1",
+                    "price": total
+                }
+            ],
+            "subtotal": total,
+            "shipping_status": "0",
+            "shipping_amount": "0",
+            "total": total,
+            "currency": "MXN",
+            "expiration":  `${fecha_corte} 12:00:00`
+        }
+
+        return data;
+    }
+
 
 
 }
