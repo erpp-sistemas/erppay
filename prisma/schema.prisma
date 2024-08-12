@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model adeudo_contribuyente {
+  id_adeudo_contribuyente Int            @id(map: "PK__adeudo_c__3968CB67802BCE29") @default(autoincrement())
+  periodo                 String?        @db.NVarChar(100)
+  impuesto_predial        Decimal?       @db.Decimal(19, 2)
+  recargo                 Decimal?       @db.Decimal(19, 2)
+  multas                  Decimal?       @db.Decimal(19, 2)
+  gastos_ejecucion        Decimal?       @db.Decimal(19, 2)
+  alum_publico            Decimal?       @db.Decimal(19, 2)
+  pronto_pago             Decimal?       @db.Decimal(19, 2)
+  contribuyente_cumplido  Decimal?       @db.Decimal(19, 2)
+  grupos_vulnerables      Decimal?       @db.Decimal(19, 2)
+  sub_total               Decimal?       @db.Decimal(19, 2)
+  iva                     Decimal?       @db.Decimal(19, 2)
+  total                   Decimal?       @db.Decimal(19, 2)
+  fecha_corte             DateTime?      @db.Date
+  fecha_ingreso           DateTime?      @db.Date
+  cuenta                  String?        @db.NVarChar(100)
+  contribuyente           contribuyente? @relation(fields: [cuenta], references: [cuenta], onDelete: NoAction, onUpdate: NoAction, map: "fk_contribuyente_adeudo_contr")
+}
+
+model contacto_contribuyente {
+  id_contacto_contribuyente Int            @id(map: "PK__contacto__4E8E8216EDE65072") @default(autoincrement())
+  numero_celular            String?        @db.NVarChar(20)
+  email                     String?        @db.NVarChar(100)
+  facebook                  String?        @db.NVarChar(100)
+  cuenta                    String?        @db.NVarChar(100)
+  contribuyente             contribuyente? @relation(fields: [cuenta], references: [cuenta], onDelete: NoAction, onUpdate: NoAction, map: "fk_contribuyente_cont_contr")
+}
+
+model contribuyente {
+  id_contribuyente              Int                             @default(autoincrement())
+  cuenta                        String                          @id(map: "PK__contribu__682E1D9DFE34F81B") @db.NVarChar(100)
+  clave_catastral               String?                         @db.NVarChar(100)
+  propietario                   String                          @db.NVarChar(255)
+  tipo_predio                   Int?
+  tipo_uso_suelo                Int?
+  id_plaza                      Int
+  adeudo_contribuyente          adeudo_contribuyente[]
+  contacto_contribuyente        contacto_contribuyente[]
+  plaza                         plaza                           @relation(fields: [id_plaza], references: [id_plaza], onUpdate: NoAction, map: "fk_plaza_contribuyente")
+  cat_tipo_predio               cat_tipo_predio?                @relation(fields: [tipo_predio], references: [id_tipo_predio], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_predio_contr")
+  cat_tipo_uso_suelo            cat_tipo_uso_suelo?             @relation(fields: [tipo_uso_suelo], references: [id_tipo_uso_suelo], onDelete: NoAction, onUpdate: NoAction, map: "fk_tipo_uso_suelo_contr")
+  domicilio_contribuyente       domicilio_contribuyente[]
+  valor_catastral_contribuyente valor_catastral_contribuyente[]
+}
+
+model domicilio_contribuyente {
+  id_domicilio_contribuyente Int            @id(map: "PK__domicili__E89778D14AC0C7D0") @default(autoincrement())
+  calle                      String         @db.NVarChar(100)
+  numero_exterior            Int?
+  numero_interior            Int?
+  manzana                    Int?
+  lote                       Int?
+  colonia                    String?        @db.NVarChar(100)
+  codigo_postal              Int?
+  poblacion                  String?        @db.NVarChar(100)
+  cuenta                     String?        @db.NVarChar(100)
+  contribuyente              contribuyente? @relation(fields: [cuenta], references: [cuenta], onDelete: NoAction, onUpdate: NoAction, map: "fk_contribuyente_dom_contr")
+}
+
+model plaza {
+  id_plaza      Int             @id(map: "PK__plaza__04D4A2331F323C94") @default(autoincrement())
+  nombre        String          @db.NVarChar(100)
+  logo          String?         @db.NVarChar(255)
+  direccion     String?         @db.NVarChar(255)
+  contribuyente contribuyente[]
+}
+
+model valor_catastral_contribuyente {
+  id_valor_catastral_contribuyente Int            @id(map: "PK__valor_ca__118E36C8963147E4") @default(autoincrement())
+  superficie_terreno               Decimal?       @db.Decimal(19, 2)
+  superficie_construccion          Decimal?       @db.Decimal(19, 2)
+  valor_terreno                    Decimal?       @db.Decimal(19, 2)
+  valor_construccion               Decimal?       @db.Decimal(19, 2)
+  valor_catastral                  Decimal?       @db.Decimal(19, 2)
+  cuenta                           String?        @db.NVarChar(100)
+  contribuyente                    contribuyente? @relation(fields: [cuenta], references: [cuenta], onDelete: NoAction, onUpdate: NoAction, map: "fk_contribuyente_valor_cat_contr")
+}
+
+model cat_tipo_predio {
+  id_tipo_predio Int             @id(map: "PK__cat_tipo__8B9EFD1D426C5C67") @default(autoincrement())
+  tipo_predio    String?         @db.NVarChar(100)
+  contribuyente  contribuyente[]
+}
+
+model cat_tipo_uso_suelo {
+  id_tipo_uso_suelo Int             @id(map: "PK__cat_tipo__1404FDE86DD99E66") @default(autoincrement())
+  tipo_uso_suelo    String?         @db.NVarChar(100)
+  contribuyente     contribuyente[]
+}
