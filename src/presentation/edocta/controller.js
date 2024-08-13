@@ -32,9 +32,10 @@ export class EdoCtaController {
                 const fecha = date.toISOString();
                 this.storage.uploadFile(pdf, 'estados_cuenta', `${account}-${fecha}.pdf`)
                     .then(file_url => {
+                        const file = 'https://erppay.s3.amazonaws.com/estados_cuenta/52460-2024-08-12T22%3A58%3A27.734Z.pdf'
                         res.status(200).json({
                             option_name: 'Selección de numero de cuenta',
-                            message: `Tu estado de cuenta se genero con éxito, lo puedes visualizar en la siguiente liga\n${file_url}`
+                            message: `Tu estado de cuenta se genero con éxito, lo puedes visualizar en la siguiente liga\n${file}`
                         })
                     }).catch(error => res.status(400).json({ error: 'Error al subir el archivo ', error }))
 
