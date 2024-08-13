@@ -52,22 +52,22 @@ export class EdoCtaService {
         const data = {
             "client-name": owner,
             "client-lastname": "",
-            "whatsapp": "5215531284105",
-            "reference": "A12345",
-            "concepts": [
+            whatsapp: "5215531284105",
+            reference: "A12345",
+            concepts: [
                 {
-                    "id": "NA",
-                    "title": "Pago predial",
-                    "qty": "1",
-                    "price": total
+                    id: "NA",
+                    title: "Pago predial",
+                    qty: "1",
+                    price: total
                 }
             ],
-            "subtotal": total,
-            "shipping_status": "0",
-            "shipping_amount": "0",
-            "total": total,
-            "currency": "MXN",
-            "expiration":  `${fecha_corte} 12:00:00`
+            subtotal: total,
+            shipping_status: "0",
+            shipping_amount: "0",
+            total: total,
+            currency: "MXN",
+            expiration:  `${fecha_corte.split('T')[0]} 12:00:00`
         }
 
         return data;

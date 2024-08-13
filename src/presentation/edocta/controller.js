@@ -53,8 +53,7 @@ export class EdoCtaController {
 
             const config = {
                 headers: {
-                    'Authorization': `Bearer ${envs.AUTHORIZATION}`,
-                    'Content-Type': 'application/json' // Asegúrate de que el tipo de contenido esté correctamente definido
+                    'Authorization': `Bearer ${envs.AUTHORIZATION}`
                 },
                 data: obj_waopay
             };
@@ -64,7 +63,17 @@ export class EdoCtaController {
                     const url = data.data.url
                     res.status(200).json({
                         option_name: 'Selección de numero de cuenta',
-                        message: `Puedes ingresar a la siguiente liga para realizar tu pago\n${url}`
+                        message: `Puedes ingresar a la siguiente liga para realizar tu pago\n${url}`,
+                        options: [
+                            {
+                                key: "1",
+                                value: "Menu principal"
+                            },
+                            {
+                                key: "2",
+                                value: "Salir"
+                            }
+                        ]
                     })
                 })
         })
