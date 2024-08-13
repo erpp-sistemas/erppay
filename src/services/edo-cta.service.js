@@ -50,8 +50,8 @@ export class EdoCtaService {
         const fecha_corte = debt_arr[0].fecha_corte;
 
         const data = {
-            "client-name": owner,
-            "client-lastname": "",
+            "client-name": "Jesus",
+            "client-lastname": "Flores Gutierrez",
             whatsapp: "5215531284105",
             reference: "A12345",
             concepts: [

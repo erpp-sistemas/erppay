@@ -10,7 +10,7 @@ export const example_data = {
         {
             id_adeudo_contribuyente: 6,
             periodo: '01/2023-12/2023',
-            impuesto_predial: 5453.57,
+            impuesto_predial: 5.57,
             recargo: 0,
             multas: 0,
             gastos_ejecucion: 0,
@@ -18,9 +18,9 @@ export const example_data = {
             pronto_pago: 0,
             contribuyente_cumplido: 0,
             grupos_vulnerables: 0,
-            sub_total: 5453.57,
+            sub_total: 5.57,
             iva: 0,
-            total: 5453.57,
+            total: 5.57,
             fecha_corte: '2024-08-31T00:00:00.000Z',
             fecha_ingreso: '2024-08-12T00:00:00.000Z',
             cuenta: '52460'
@@ -28,7 +28,7 @@ export const example_data = {
         {
             id_adeudo_contribuyente: 26,
             periodo: '01/2024-12/2024',
-            impuesto_predial: 5453.57,
+            impuesto_predial: 2.02,
             recargo: 0,
             multas: 0,
             gastos_ejecucion: 0,
@@ -36,9 +36,9 @@ export const example_data = {
             pronto_pago: 0,
             contribuyente_cumplido: 0,
             grupos_vulnerables: 0,
-            sub_total: 5453.57,
+            sub_total: 2.02,
             iva: 0,
-            total: 5453.57,
+            total: 2.02,
             fecha_corte: '2024-08-31T00:00:00.000Z',
             fecha_ingreso: '2024-08-12T00:00:00.000Z',
             cuenta: '52460'
