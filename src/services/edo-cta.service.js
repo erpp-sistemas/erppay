@@ -1,6 +1,7 @@
 import { prisma } from '../data/sqlserver/index.js';
 import { edoCtaCuautitlanIzcalliPredio } from '../templates/edoCta.js';
 import { PdfCreate } from '../config/pdf-create.adapter.js';
+import { example_data } from '../data/example-data.js'
 
 
 export class EdoCtaService {
@@ -10,19 +11,20 @@ export class EdoCtaService {
     }
 
     static async getInfoAccount(account) {
-        const data = await prisma.contribuyente.findUnique({
-            where: {
-                cuenta: account
-            },
-            include: {
-                adeudo_contribuyente: true,
-                domicilio_contribuyente: true,
-                cat_tipo_predio: true,
-                cat_tipo_uso_suelo: true,
-                valor_catastral_contribuyente: true,
-                plaza: true
-            }
-        })
+        // const data = await prisma.contribuyente.findUnique({
+        //     where: {
+        //         cuenta: account
+        //     },
+        //     include: {
+        //         adeudo_contribuyente: true,
+        //         domicilio_contribuyente: true,
+        //         cat_tipo_predio: true,
+        //         cat_tipo_uso_suelo: true,
+        //         valor_catastral_contribuyente: true,
+        //         plaza: true
+        //     }
+        // })
+        const data = example_data;
         return data;
     }
 
