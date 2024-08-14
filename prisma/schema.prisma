@@ -24,6 +24,7 @@ model adeudo_contribuyente {
   fecha_corte             DateTime?      @db.Date
   fecha_ingreso           DateTime?      @db.Date
   cuenta                  String?        @db.NVarChar(100)
+  reference               String?        @db.NVarChar(20)
   contribuyente           contribuyente? @relation(fields: [cuenta], references: [cuenta], onDelete: NoAction, onUpdate: NoAction, map: "fk_contribuyente_adeudo_contr")
 }
 

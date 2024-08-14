@@ -20,13 +20,13 @@ export class EdoCtaController {
     generateEdocta = async (req, res) => {
         let { account } = req.body;
         EdoCtaService.getInfoAccount(account).then(data => {
-            const { id_plaza, clave_catastral, propietario, adeudo_contribuyente, domicilio_contribuyente, cat_tipo_predio, cat_tipo_uso_suelo, valor_catastral_contribuyente } = data;
+            const { clave_catastral, propietario, adeudo_contribuyente, domicilio_contribuyente, cat_tipo_predio, cat_tipo_uso_suelo, valor_catastral_contribuyente, plaza } = data;
             const { tipo_predio } = cat_tipo_predio;
             const { tipo_uso_suelo } = cat_tipo_uso_suelo;
             const domicilio_contribuyente_row = domicilio_contribuyente[0];
             const valor_catastral_contribuyente_row = valor_catastral_contribuyente[0];
 
-            EdoCtaService.generatePdf(id_plaza, account, propietario, adeudo_contribuyente, clave_catastral, domicilio_contribuyente_row, valor_catastral_contribuyente_row, tipo_predio, tipo_uso_suelo).then(pdf => {
+            EdoCtaService.generatePdf(plaza, account, propietario, adeudo_contribuyente, clave_catastral, domicilio_contribuyente_row, valor_catastral_contribuyente_row, tipo_predio, tipo_uso_suelo).then(pdf => {
 
                 const date = new Date();
                 const fecha = date.toISOString();
@@ -48,8 +48,8 @@ export class EdoCtaController {
     getLinkWaopay = async (req, res) => {
         let { account } = req.body;
         EdoCtaService.getInfoAccount(account).then(data => {
-            const { propietario, adeudo_contribuyente } = data;
-            const obj_waopay = EdoCtaService.createLinkWaopay(propietario, adeudo_contribuyente)
+            const { plaza, propietario, adeudo_contribuyente } = data;
+            const obj_waopay = EdoCtaService.createLinkWaopay(plaza, propietario, adeudo_contribuyente)
 
             const config = {
                 headers: {

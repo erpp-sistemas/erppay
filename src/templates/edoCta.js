@@ -45,7 +45,7 @@ function addTotales(debt_arr) {
 }
 
 
-export function edoCtaCuautitlanIzcalliPredio(account, owner, debt, address, clave_catastral, value_cat, tipo_predio, tipo_uso_suelo) {
+export function edoCtaCuautitlanIzcalliPredio(logo, account, owner, debt, address, clave_catastral, value_cat, tipo_predio, tipo_uso_suelo) {
 
     const debt_rows = generateRowsDebt(debt);
     const totales = addTotales(debt);
@@ -179,7 +179,7 @@ export function edoCtaCuautitlanIzcalliPredio(account, owner, debt, address, cla
 
                 <div class="header">
                     <div class="group-img">
-                        <img src="https://www.infobae.com/new-resizer/Zsp8SOFxWytgZc1YaYrebUBWPpU=/arc-anglerfish-arc2-prod-infobae/public/2HJDOZ7HGZGB3F3GZZL7XYYQP4.jpg" alt="Logo"/>
+                        <img src=${logo} alt="Logo"/>
                     </div> 
 
                     <div class="group-titulo">
@@ -199,7 +199,7 @@ export function edoCtaCuautitlanIzcalliPredio(account, owner, debt, address, cla
                 <hr class="custom-hr">
                 <div class="ubicacion-datos-predio">
                     <p>UBICACION: <span> ${address.calle} ${address.numero_exterior} ${address.numero_interior} ${address.colonia} </span> </p>
-                    <p>UBICACION: DATOS DEL PREDIO </p>
+                    <p>DATOS DEL PREDIO </p>
                 </div>
                 <div class="datos-secondary">
                     <div class="datos-secondary-valores">
