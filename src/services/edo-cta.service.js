@@ -1,7 +1,6 @@
 import { prisma } from '../data/sqlserver/index.js';
 import { edoCtaCuautitlanIzcalliPredio } from '../templates/edoCta.js';
 import { PdfCreate } from '../config/pdf-create.adapter.js';
-import { example_data } from '../data/example-data.js'
 
 
 export class EdoCtaService {
@@ -24,9 +23,7 @@ export class EdoCtaService {
                 plaza: true
             }
         })
-        console.log(data_db);
-        const data = example_data;
-        return data;
+        return data_db;
     }
 
 
@@ -51,9 +48,9 @@ export class EdoCtaService {
         const fecha_corte = debt_arr[0].fecha_corte;
 
         const data = {
-            "client-name": "Jesus",
-            "client-lastname": "Flores Gutierrez",
-            whatsapp: "5215531284105",
+            "client-name": owner,
+            "client-lastname": "",
+            whatsapp: "",
             reference: "A12345",
             concepts: [
                 {

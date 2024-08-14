@@ -10,7 +10,6 @@ export class EdoCtaRoutes {
 
         const router = express.Router();
 
-
         const edoCtaController = new EdoCtaController();
 
         router.get('/message', edoCtaController.message);
