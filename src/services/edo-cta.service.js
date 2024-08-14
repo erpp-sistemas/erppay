@@ -11,19 +11,20 @@ export class EdoCtaService {
     }
 
     static async getInfoAccount(account) {
-        // const data = await prisma.contribuyente.findUnique({
-        //     where: {
-        //         cuenta: account
-        //     },
-        //     include: {
-        //         adeudo_contribuyente: true,
-        //         domicilio_contribuyente: true,
-        //         cat_tipo_predio: true,
-        //         cat_tipo_uso_suelo: true,
-        //         valor_catastral_contribuyente: true,
-        //         plaza: true
-        //     }
-        // })
+        const data_db = await prisma.contribuyente.findUnique({
+            where: {
+                cuenta: account
+            },
+            include: {
+                adeudo_contribuyente: true,
+                domicilio_contribuyente: true,
+                cat_tipo_predio: true,
+                cat_tipo_uso_suelo: true,
+                valor_catastral_contribuyente: true,
+                plaza: true
+            }
+        })
+        console.log(data_db);
         const data = example_data;
         return data;
     }
