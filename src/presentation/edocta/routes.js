@@ -15,6 +15,7 @@ export class EdoCtaRoutes {
         router.get('/message', edoCtaController.message);
         router.post('/generate-edocta', EdoCtaMiddleware.validateToken, edoCtaController.generateEdocta)
         router.post('/getlink-waopay', EdoCtaMiddleware.validateToken, edoCtaController.getLinkWaopay)
+        router.post('/get-statuspay', EdoCtaMiddleware.validateToken, edoCtaController.getResponseWaopay)
 
 
         return router;

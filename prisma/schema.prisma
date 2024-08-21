@@ -98,3 +98,13 @@ model cat_tipo_uso_suelo {
   tipo_uso_suelo    String?         @db.NVarChar(100)
   contribuyente     contribuyente[]
 }
+
+model pago_waopay {
+  id           Int      @id(map: "PK__pago_wao__3213E83FEFD71544") @default(autoincrement())
+  status       String?  @db.NVarChar(100)
+  country_code String?  @db.NVarChar(100)
+  whatsapp     String?  @db.NVarChar(20)
+  amount       Decimal? @db.Decimal(19, 2)
+  reference    String?  @db.NVarChar(20)
+  datetime     String?  @db.NVarChar(100)
+}

@@ -79,5 +79,11 @@ export class EdoCtaController {
         })
     }
 
+    getResponseWaopay = async (req, res) => {
+        EdoCtaService.insertResponseWaopay(req.body)
+            .then( data => res.status(200).json({ message: 'Data insert success'}))
+            .catch( error => res.status(400).json({ message: 'Error on insert data' }))
+    }
+
 
 }

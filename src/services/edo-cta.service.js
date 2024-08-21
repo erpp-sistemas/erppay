@@ -80,5 +80,15 @@ export class EdoCtaService {
     }
 
 
+    static async insertResponseWaopay(data) {
+        try {
+            const insert = await prisma.pago_waopay.create({ data });
+            return insert;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
 
 }
