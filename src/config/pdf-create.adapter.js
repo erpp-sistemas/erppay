@@ -14,12 +14,12 @@ export class PdfCreate {
 
             const page = await browser.newPage();
             await page.setContent(content, {
-                waitUntil: 'networkidle0', // Esperar hasta que la página esté completamente cargada
+                waitUntil: 'networkidle0',
             });
 
             const pdf = await page.pdf({
-                format: 'letter',    // Formato de papel, en este caso carta
-                landscape: true,     // Orientación horizontal
+                format: 'letter',    
+                landscape: true,     
                 printBackground: true
             });
 
