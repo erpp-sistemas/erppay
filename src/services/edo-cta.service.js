@@ -27,6 +27,7 @@ export class EdoCtaService {
                 cat_tipo_predio: true,
                 cat_tipo_uso_suelo: true,
                 valor_catastral_contribuyente: true,
+                contacto_contribuyente: true,
                 plaza: true
             }
         })
@@ -47,18 +48,19 @@ export class EdoCtaService {
         }
     }
 
-    static createLinkWaopay(plaza, owner, debt_arr) {
+    static createLinkWaopay(plaza, owner, debt_arr, contact) {
         const { id_plaza } = plaza;
         const obj = this.edo_cta_obj[id_plaza];
         const concept = obj.concept
         const total = debt_arr.reduce((acc, debt) => acc + Number(debt.sub_total), 0);
         const fecha_corte = debt_arr[0].fecha_corte;
         const reference = debt_arr[0].reference;
-
+        const whatsapp = contact[0].numero_celular;
+        
         const data = {
-            "client-name": owner,
-            "client-lastname": "",
-            whatsapp: "",
+            client_name: owner,
+            client_lastname: "",
+            whatsapp: whatsapp,
             reference: reference,
             concepts: [
                 {
@@ -83,6 +85,7 @@ export class EdoCtaService {
     static async insertResponseWaopay(data) {
         try {
             const insert = await prisma.pago_waopay.create({ data });
+            // todo implementar algo para mandarle un mensaje por whatsapp al usuario
             return insert;
         } catch (error) {
             console.error(error);

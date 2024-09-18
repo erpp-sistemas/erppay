@@ -48,8 +48,8 @@ export class EdoCtaController {
     getLinkWaopay = async (req, res) => {
         let { account } = req.body;
         EdoCtaService.getInfoAccount(account).then(data => {
-            const { plaza, propietario, adeudo_contribuyente } = data;
-            const obj_waopay = EdoCtaService.createLinkWaopay(plaza, propietario, adeudo_contribuyente)
+            const { plaza, propietario, adeudo_contribuyente, contacto_contribuyente } = data;
+            const obj_waopay = EdoCtaService.createLinkWaopay(plaza, propietario, adeudo_contribuyente, contacto_contribuyente)
 
             const config = {
                 headers: {
