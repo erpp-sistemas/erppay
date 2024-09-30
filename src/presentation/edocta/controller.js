@@ -109,7 +109,7 @@ export class EdoCtaController {
                     }
                 }
             );
-            res.status(200).json(response.data)
+            return response;
         } catch (error) {
             console.error('Error sending notification:', error);
         }
