@@ -60,6 +60,7 @@ export class EdoCtaService {
         const data = {
             client_name: owner,
             client_lastname: "",
+            email: 'antonio.ticante12@gmail.com',
             whatsapp: whatsapp,
             reference: reference,
             concepts: [
@@ -85,7 +86,6 @@ export class EdoCtaService {
     static async insertResponseWaopay(data) {
         try {
             const insert = await prisma.pago_waopay.create({ data });
-            // todo implementar algo para mandarle un mensaje por whatsapp al usuario
             return insert;
         } catch (error) {
             console.error(error);
