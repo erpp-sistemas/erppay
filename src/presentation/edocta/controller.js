@@ -81,6 +81,8 @@ export class EdoCtaController {
 
     getResponseWaopay = async (req, res) => {
         const { status, whatsapp } = req.body;
+        console.log(status);
+        console.log(whatsapp);
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
                 if (status === "paid") {
@@ -98,7 +100,7 @@ export class EdoCtaController {
                 {
                     phone_number: phone_number,
                     internal_id: '56de6d07-e340-4e6a-8331-9b41e41c724a',
-                    template_params: [''],
+                    template_params: [],
                 },
                 {
                     headers: {

@@ -56,11 +56,12 @@ export class EdoCtaService {
         const fecha_corte = debt_arr[0].fecha_corte;
         const reference = debt_arr[0].reference;
         const whatsapp = contact[0].numero_celular;
-        
+        const email = contact[0].email;
+    
         const data = {
             client_name: owner,
             client_lastname: "",
-            email: 'antonio.ticante12@gmail.com',
+            email: email,
             whatsapp: whatsapp,
             reference: reference,
             concepts: [
