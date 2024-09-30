@@ -10,4 +10,5 @@ export const envs = {
     REGION: get('REGION').required().asString(),
     URL_WAOPAY: get('URL_WAOPAY').required().asString(),
     AUTHORIZATION: get('AUTHORIZATION').required().asString(),
+    API_KEY_MERCATELY: get('API_KEY_MERCATELY').required().asString(),
 }

@@ -80,34 +80,33 @@ export class EdoCtaController {
     }
 
     getResponseWaopay = async (req, res) => {
-        console.log(`req.body getresponsewaopay, ${data}`);
+        const { status, whatsapp } = req.body;
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
-                //const { name, phone_number } = data;
-                await this.sendMessage('Antonio', '5531284105');
+                if (status === "paid") {
+                    await this.sendMessage(whatsapp);
+                }
                 res.status(200).json({ message: 'Data insert success' })
             }).catch(error => res.status(400).json({ message: 'Error on insert data' }))
     }
 
 
-    sendMessage = async (name, phone_number) => {
+    sendMessage = async (phone_number) => {
         try {
             const response = await axios.post(
                 'https://app.mercately.com/retailers/api/v1/whatsapp/send_notification_by_id',
                 {
                     phone_number: phone_number,
-                    internal_id: '9e496261-3cd3-4d09-b9ce-f4ac7da86c25',
-                    template_params: [name],
+                    internal_id: '56de6d07-e340-4e6a-8331-9b41e41c724a',
+                    template_params: [''],
                 },
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'api-key': 'dba978c27456a676ba086c7aa610ca62'
+                        'api-key': envs.API_KEY_MERCATELY
                     }
                 }
             );
-
-            console.log(response.data);
             res.status(200).json(response.data)
         } catch (error) {
             console.error('Error sending notification:', error);
