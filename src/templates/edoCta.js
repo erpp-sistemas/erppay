@@ -1,3 +1,4 @@
+import fs from 'fs';
 
 function generateRowsDebt(debt_arr) {
     return debt_arr.map(debt => `
@@ -41,16 +42,19 @@ function addTotales(debt_arr) {
             <td> ${subtotal} </td>
         `,
         total: subtotal
-    }  
+    }
 }
 
 
-export function edoCtaCuautitlanIzcalliPredio(logo, account, owner, debt, address, clave_catastral, value_cat, tipo_predio, tipo_uso_suelo) {
+export async function edoCtaCuautitlanIzcalliPredio(logo, account, owner, debt, address, clave_catastral, value_cat, tipo_predio, tipo_uso_suelo) {
 
     const debt_rows = generateRowsDebt(debt);
     const totales = addTotales(debt);
     const fecha = debt[0].fecha_corte;
 
+    let logo_data = await getFile('')
+    logo_data = `data:image/jpeg;base64,${logo_data}`
+    
     return `
             <!DOCTYPE html>
             <html>
@@ -179,7 +183,7 @@ export function edoCtaCuautitlanIzcalliPredio(logo, account, owner, debt, addres
 
                 <div class="header">
                     <div class="group-img">
-                        <img src=${logo} alt="Logo"/>
+                        <img src=${logo_data} alt="Logo"/>
                     </div> 
 
                     <div class="group-titulo">
@@ -283,4 +287,21 @@ export function edoCtaCuautitlanIzcalliPredio(logo, account, owner, debt, addres
             </body>
             </html>
         `
+}
+
+
+
+
+const getFile = async (path) => {
+
+    return new Promise((resolve, reject) => {
+        fs.readFile('./src/assets/img/logo_cuautitlan_izcalli_predio.jpg', (err, data) => {
+            if (err) {
+                console.log(`Hay un error ${err}`)
+            };
+            console.log('Imagen cargada:', data);
+            resolve(data.toString('base64'));
+        });
+    })
+
 }

@@ -39,7 +39,7 @@ export class EdoCtaService {
         const { id_plaza, logo } = plaza;
         const obj = this.edo_cta_obj[id_plaza];
         const fnEdoCta = obj.fnGenerateEdoCta;
-        const content = fnEdoCta(logo, account, owner, debtArr, address_obj, clave_cat, value_cat_obj, tipo_predio, tipo_uso_suelo);
+        const content = await fnEdoCta(logo, account, owner, debtArr, address_obj, clave_cat, value_cat_obj, tipo_predio, tipo_uso_suelo);
         try {
             const pdf = await PdfCreate.createPdf(content);
             return pdf;

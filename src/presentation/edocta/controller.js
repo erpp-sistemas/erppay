@@ -99,7 +99,7 @@ export class EdoCtaController {
                 'https://app.mercately.com/retailers/api/v1/whatsapp/send_notification_by_id',
                 {
                     phone_number: phone_number,
-                    internal_id: '56de6d07-e340-4e6a-8331-9b41e41c724a',
+                    internal_id: '22e0a7c7-bc7c-4870-a52c-9b0bbd703222',
                     template_params: [],
                 },
                 {
