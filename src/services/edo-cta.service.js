@@ -93,6 +93,15 @@ export class EdoCtaService {
         }
     }
 
+    static async saveEmail( data ) {
+        try {
+            const insert = await prisma.send_factura({ data })
+            return insert;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
 
 }

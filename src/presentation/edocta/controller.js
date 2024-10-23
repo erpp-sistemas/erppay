@@ -81,25 +81,25 @@ export class EdoCtaController {
 
     getResponseWaopay = async (req, res) => {
         const { status, whatsapp } = req.body;
-        console.log(status);
-        console.log(whatsapp);
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
                 if (status === "paid") {
-                    await this.sendMessage(whatsapp);
+                    await this.sendMessageAfterPayIntent(whatsapp, '8747bdc4-f80d-4ede-8137-3227473e937e');
+                } else {
+                    await this.sendMessageAfterPayIntent(whatsapp, '');
                 }
                 res.status(200).json({ message: 'Data insert success' })
             }).catch(error => res.status(400).json({ message: 'Error on insert data' }))
     }
 
 
-    sendMessage = async (phone_number) => {
+    sendMessageAfterPayIntent = async (phone_number, id_template) => {
         try {
             const response = await axios.post(
                 'https://app.mercately.com/retailers/api/v1/whatsapp/send_notification_by_id',
                 {
                     phone_number: phone_number,
-                    internal_id: '22e0a7c7-bc7c-4870-a52c-9b0bbd703222',
+                    internal_id: id_template,
                     template_params: [],
                 },
                 {
@@ -114,7 +114,21 @@ export class EdoCtaController {
             console.error('Error sending notification:', error);
         }
 
+    }
 
+
+    validateAndSaveEmail = async (req, res) => {
+        const { email } = req.body;
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const isEmail = regex.test(email)
+        if (isEmail) {
+            EdoCtaService.saveEmail(req.body).then(message => {
+                res.status(200).json({
+                    option_name: 'Selección de numero de cuenta',
+                    message: `Su factura será enviada en el emaoñ proporcionado en un lapso de 24 horas`
+                })
+            })
+        }
     }
 
 

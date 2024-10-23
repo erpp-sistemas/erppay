@@ -108,3 +108,10 @@ model pago_waopay {
   reference    String?  @db.NVarChar(20)
   datetime     String?  @db.NVarChar(100)
 }
+
+model send_factura {
+  id      Int       @id(map: "PK__send_fac__3213E83F16A628C5") @default(autoincrement())
+  cuenta  String?   @db.NVarChar(100)
+  email   String?   @db.NVarChar(255)
+  date_at DateTime? @db.DateTime
+}
