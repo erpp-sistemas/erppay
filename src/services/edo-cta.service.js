@@ -57,6 +57,8 @@ export class EdoCtaService {
         const reference = debt_arr[0].reference;
         const whatsapp = contact[0].numero_celular;
         const email = contact[0].email;
+
+        console.log(email)
     
         const data = {
             client_name: owner,

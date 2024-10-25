@@ -48,6 +48,7 @@ export class EdoCtaController {
     getLinkWaopay = async (req, res) => {
         let { account } = req.body;
         EdoCtaService.getInfoAccount(account).then(data => {
+            console.log(data)
             const { plaza, propietario, adeudo_contribuyente, contacto_contribuyente } = data;
             const obj_waopay = EdoCtaService.createLinkWaopay(plaza, propietario, adeudo_contribuyente, contacto_contribuyente)
 
@@ -81,6 +82,7 @@ export class EdoCtaController {
 
     getResponseWaopay = async (req, res) => {
         const { status, whatsapp } = req.body;
+        console.log(status, whatsapp)
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
                 if (status === "paid") {
