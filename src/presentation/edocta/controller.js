@@ -86,7 +86,7 @@ export class EdoCtaController {
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
                 if (status === "paid") {
-                    await this.sendMessageAfterPayIntent(whatsapp, '8747bdc4-f80d-4ede-8137-3227473e937e');
+                    await this.sendMessageAfterPayIntent(whatsapp, '943418af-6e91-4317-8760-410f38b0f28c');
                 } else {
                     await this.sendMessageAfterPayIntent(whatsapp, '');
                 }
