@@ -66,14 +66,7 @@ export class EdoCtaController {
                         option_name: 'Selección de numero de cuenta',
                         message: `Puedes ingresar a la siguiente liga para realizar tu pago\n${url}`,
                         options: [
-                            {
-                                key: "1",
-                                value: "Menu principal"
-                            },
-                            {
-                                key: "2",
-                                value: "Salir"
-                            }
+                            
                         ]
                     })
                 })
@@ -86,7 +79,7 @@ export class EdoCtaController {
         EdoCtaService.insertResponseWaopay(req.body)
             .then(async data => {
                 if (status === "paid") {
-                    await this.sendMessageAfterPayIntent(whatsapp, '943418af-6e91-4317-8760-410f38b0f28c');
+                    await this.sendMessageAfterPayIntent(whatsapp, '52ba4e24-c5f1-47ba-b251-71713e70a79f');
                 } else {
                     await this.sendMessageAfterPayIntent(whatsapp, '');
                 }
